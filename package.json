@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "punycode": "^1.4.0"
+  }
+}

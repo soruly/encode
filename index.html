@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Common Encoder / Decoder</title>
+<style type="text/css">
+body{
+	font-family:Arial;
+	font-size:12px;
+}
+input, textarea{
+	font-family:Arial;
+	font-size:12px;
+	border:0px;
+	background-color:#EEEEEE;
+}
+textarea{
+	width:400px;
+	height:100px;
+}
+
+td{
+	border:1px solid #666;
+	background-color:#EEEEEE;
+}
+</style>
+</head>
+
+<form id="encode" action="#">
+<fieldset style="border:none">
+<p>HTML</p>
+<textarea id="html" rows="0" cols="0"></textarea>
+<input id="encode_html" type="button" value="Encode" />
+<input id="decode_html" type="button" value="Decode" />
+<p>Unicode</p>
+<textarea id="unicode" rows="0" cols="0"></textarea>
+<input id="encode_unicode" type="button" value="Encode" />
+<input id="decode_unicode" type="button" value="Decode" />
+<p>URI</p>
+<textarea id="uri" rows="0" cols="0"></textarea>
+<input id="encode_uri" type="button" value="Encode" />
+<input id="decode_uri" type="button" value="Decode" />
+<p>URI Component</p>
+<textarea id="uri_component" rows="0" cols="0"></textarea>
+<input id="encode_uri_component" type="button" value="Encode" />
+<input id="decode_uri_component" type="button" value="Decode" />
+<p>Base64</p>
+<textarea id="base64" rows="0" cols="0"></textarea>
+<input id="encode_base64" type="button" value="Encode" />
+<input id="decode_base64" type="button" value="Decode" />
+<p>Punycode</p>
+<textarea id="punycode_field" rows="0" cols="0"></textarea>
+<input id="encode_punycode" type="button" value="Encode" />
+<input id="decode_punycode" type="button" value="Decode" />
+</fieldset>
+</form>
+<p></p>
+<script src="node_modules/punycode/punycode.js"></script>
+<script type="text/javascript">
+<!--
+
+function html_encode(str){
+	var a = Array();
+	for (i=0; i<str.length; i++) a[i] = str.charCodeAt(i);
+	return "&#" + a.join(";&#") + ";";
+}
+
+function html_decode(str){
+	return str.replace(/&#(x)?([^&]{1,5});?/g, function (a, b, c) {
+		return String.fromCharCode(parseInt(c, b ? 16 : 10));
+	});
+}
+
+function convertString2Unicode(s){
+	var uniString = "", hexVal, uniChar;
+	for(var i = 0; i < s.length; ++i){
+		hexVal = Number(s.charCodeAt(i)).toString(16);
+		uniChar = "\\u" + ("000" + hexVal).match(/.{4}$/)[0];
+		uniString += uniChar;
+	}
+	return uniString;
+}
+
+function convertUnicode2String(s){
+	var str = "", searchExp = /'.+'/, t = '\''+s+'\'';
+	str = s == "" ? "" : eval(t.match(searchExp)[0]);
+	return str;
+}
+
+var html = document.getElementById("html");
+var encode_html = document.getElementById("encode_html");
+var decode_html = document.getElementById("decode_html");
+encode_html.onclick = function(){html.value = html_encode(html.value);html.select();}
+decode_html.onclick = function(){html.value = html_decode(html.value);html.select();}
+
+var unicode = document.getElementById("unicode");
+var encode_unicode = document.getElementById("encode_unicode");
+var decode_unicode = document.getElementById("decode_unicode");
+encode_unicode.onclick = function(){unicode.value = convertString2Unicode(unicode.value);unicode.select();}
+decode_unicode.onclick = function(){unicode.value = convertUnicode2String(unicode.value);unicode.select();}
+
+var uri = document.getElementById("uri");
+var encode_uri = document.getElementById("encode_uri");
+var decode_uri = document.getElementById("decode_uri");
+encode_uri.onclick = function(){uri.value = encodeURI(uri.value);uri.select();}
+decode_uri.onclick = function(){uri.value = decodeURI(uri.value);uri.select();}
+
+var uri_component = document.getElementById("uri_component");
+var encode_uri_component = document.getElementById("encode_uri_component");
+var decode_uri_component = document.getElementById("decode_uri_component");
+encode_uri_component.onclick = function(){uri_component.value = encodeURIComponent(uri_component.value);uri_component.select();}
+decode_uri_component.onclick = function(){uri_component.value = decodeURIComponent(uri_component.value);uri_component.select();}
+
+var base64 = document.getElementById("base64");
+var encode_base64 = document.getElementById("encode_base64");
+var decode_base64 = document.getElementById("decode_base64");
+encode_base64.onclick = function(){base64.value = btoa(base64.value);base64.select();}
+decode_base64.onclick = function(){base64.value = atob(base64.value);base64.select();}
+
+var punycode_field = document.getElementById("punycode_field");
+var encode_punycode = document.getElementById("encode_punycode");
+var decode_punycode = document.getElementById("decode_punycode");
+encode_punycode.onclick = function(){punycode_field.value = punycode.toASCII(punycode_field.value);punycode_field.select();}
+decode_punycode.onclick = function(){punycode_field.value = punycode.toUnicode(punycode_field.value);punycode_field.select();}
+
+-->
+</script>
+</body>
+</html>
