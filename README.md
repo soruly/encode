@@ -1,5 +1,5 @@
-# Common Encoder / Decoder / Hashings
-A simple all-in-one webpage for common encodings / hashings
+A simple javascript all-in-one webpage for common encodings / hashings.  
+https://lab.soruly.hk/encode/
 
 ## Supported Encodings
 - HTML
@@ -9,7 +9,8 @@ A simple all-in-one webpage for common encodings / hashings
 - Base64
 - Punycode (Requires [punycode.js](https://github.com/bestiejs/punycode.js))
 
-## Supported Hashings (Requires [jshashes](https://github.com/h2non/jshashes))
+## Supported Hashings
+(Requires [jsHashes](https://github.com/h2non/jshashes))
 - MD5
 - SHA1
 - SHA256
