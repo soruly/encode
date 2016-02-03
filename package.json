@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jshashes": "^1.0.5",
     "punycode": "^1.4.0"
   }
 }

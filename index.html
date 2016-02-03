@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Common Encoder / Decoder</title>
+<title>Common Encoder / Decoder / Hashing</title>
 <style type="text/css">
 body{
 	font-family:Arial;
@@ -18,7 +18,12 @@ textarea{
 	width:400px;
 	height:100px;
 }
-
+textarea#md5, textarea#sha1, textarea#sha256, textarea#sha512{
+	height:15px;
+}
+textarea#sha256, textarea#sha512{
+	width:1000px;
+}
 td{
 	border:1px solid #666;
 	background-color:#EEEEEE;
@@ -29,33 +34,46 @@ td{
 <form id="encode" action="#">
 <fieldset style="border:none">
 <p>HTML</p>
-<textarea id="html" rows="0" cols="0"></textarea>
+<textarea id="html" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_html" type="button" value="Encode" />
 <input id="decode_html" type="button" value="Decode" />
 <p>Unicode</p>
-<textarea id="unicode" rows="0" cols="0"></textarea>
+<textarea id="unicode" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_unicode" type="button" value="Encode" />
 <input id="decode_unicode" type="button" value="Decode" />
 <p>URI</p>
-<textarea id="uri" rows="0" cols="0"></textarea>
+<textarea id="uri" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_uri" type="button" value="Encode" />
 <input id="decode_uri" type="button" value="Decode" />
 <p>URI Component</p>
-<textarea id="uri_component" rows="0" cols="0"></textarea>
+<textarea id="uri_component" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_uri_component" type="button" value="Encode" />
 <input id="decode_uri_component" type="button" value="Decode" />
 <p>Base64</p>
-<textarea id="base64" rows="0" cols="0"></textarea>
+<textarea id="base64" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_base64" type="button" value="Encode" />
 <input id="decode_base64" type="button" value="Decode" />
 <p>Punycode</p>
-<textarea id="punycode_field" rows="0" cols="0"></textarea>
+<textarea id="punycode_field" rows="0" cols="0" spellcheck="false"></textarea>
 <input id="encode_punycode" type="button" value="Encode" />
 <input id="decode_punycode" type="button" value="Decode" />
+<p>MD5</p>
+<textarea id="md5" rows="0" cols="0" spellcheck="false"></textarea>
+<input id="hash_md5" type="button" value="Hash" />
+<p>SHA1</p>
+<textarea id="sha1" rows="0" cols="0" spellcheck="false"></textarea>
+<input id="hash_sha1" type="button" value="Hash" />
+<p>SHA-256</p>
+<textarea id="sha256" rows="0" cols="0" spellcheck="false"></textarea>
+<input id="hash_sha256" type="button" value="Hash" />
+<p>SHA-512</p>
+<textarea id="sha512" rows="0" cols="0" spellcheck="false"></textarea>
+<input id="hash_sha512" type="button" value="Hash" />
 </fieldset>
 </form>
 <p></p>
 <script src="node_modules/punycode/punycode.js"></script>
+<script src="node_modules/jshashes/hashes.min.js"></script>
 <script type="text/javascript">
 <!--
 
@@ -122,6 +140,22 @@ var encode_punycode = document.getElementById("encode_punycode");
 var decode_punycode = document.getElementById("decode_punycode");
 encode_punycode.onclick = function(){punycode_field.value = punycode.toASCII(punycode_field.value);punycode_field.select();}
 decode_punycode.onclick = function(){punycode_field.value = punycode.toUnicode(punycode_field.value);punycode_field.select();}
+
+var md5 = document.getElementById("md5");
+var hash_md5 = document.getElementById("hash_md5");
+hash_md5.onclick = function(){md5.value = new Hashes.MD5().hex(md5.value);md5.select();}
+
+var sha1 = document.getElementById("sha1");
+var hash_sha1 = document.getElementById("hash_sha1");
+hash_sha1.onclick = function(){sha1.value = new Hashes.SHA1().hex(sha1.value);sha1.select();}
+
+var sha256 = document.getElementById("sha256");
+var hash_sha256 = document.getElementById("hash_sha256");
+hash_sha256.onclick = function(){sha256.value = new Hashes.SHA256().hex(sha256.value);sha256.select();}
+
+var sha512 = document.getElementById("sha512");
+var hash_sha512 = document.getElementById("hash_sha512");
+hash_sha512.onclick = function(){sha512.value = new Hashes.SHA512().hex(sha512.value);sha512.select();}
 
 -->
 </script>

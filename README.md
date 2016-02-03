@@ -1,5 +1,5 @@
-# Common Encoder / Decoder
-A simple all-in-one javascript encoder / decoder on the web
+# Common Encoder / Decoder / Hashings
+A simple all-in-one webpage for common encodings / hashings
 
 ## Supported Encodings
 - HTML
@@ -9,7 +9,13 @@ A simple all-in-one javascript encoder / decoder on the web
 - Base64
 - Punycode (Requires [punycode.js](https://github.com/bestiejs/punycode.js))
 
+## Supported Hashings (Requires [jshashes](https://github.com/h2non/jshashes))
+- MD5
+- SHA1
+- SHA256
+- SHA512
+
 ## Installation
 ```bash
-npm install punycode
+npm install
 ```
