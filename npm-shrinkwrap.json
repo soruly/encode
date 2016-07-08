@@ -1,0 +1,16 @@
+{
+  "name": "encode",
+  "version": "1.0.0",
+  "dependencies": {
+    "jshashes": {
+      "version": "1.0.5",
+      "from": "jshashes@1.0.5",
+      "resolved": "https://registry.npmjs.org/jshashes/-/jshashes-1.0.5.tgz"
+    },
+    "punycode": {
+      "version": "2.0.0",
+      "from": "punycode@2.0.0",
+      "resolved": "https://registry.npmjs.org/punycode/-/punycode-2.0.0.tgz"
+    }
+  }
+}
