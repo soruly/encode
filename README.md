@@ -1,5 +1,4 @@
 A simple javascript all-in-one webpage for common encodings / hashings.  
-https://lab.soruly.hk/encode/
 
 ## Supported Encodings
 - HTML
