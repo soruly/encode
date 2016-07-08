@@ -1,6 +1,24 @@
 {
+  "name": "encode",
+  "version": "1.0.0",
+  "description": "All-in-one webpage for common encodings and hashings",
+  "main": "index.js",
   "dependencies": {
     "jshashes": "^1.0.5",
-    "punycode": "^1.4.0"
-  }
+    "punycode": "^2.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soruly/encode.git"
+  },
+  "author": "soruly",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soruly/encode/issues"
+  },
+  "homepage": "https://github.com/soruly/encode#readme"
 }
