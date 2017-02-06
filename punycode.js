@@ -437,4 +437,3 @@ const punycode = {
 	'toUnicode': toUnicode
 };
 
-module.exports = punycode;
