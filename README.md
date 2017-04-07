@@ -1,3 +1,6 @@
+# encode
+[![](https://david-dm.org/soruly/encode/status.svg)](https://david-dm.org/soruly/encode)
+
 A simple javascript all-in-one webpage for common encodings / hashings.  
 
 ## Supported Encodings
