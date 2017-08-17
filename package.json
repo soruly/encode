@@ -4,7 +4,7 @@
   "description": "All-in-one webpage for common encodings and hashings",
   "main": "index.js",
   "dependencies": {
-    "jshashes": "^1.0.6",
+    "jshashes": "^1.0.7",
     "punycode": "^2.1.0"
   },
   "devDependencies": {},
