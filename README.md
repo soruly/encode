@@ -3,6 +3,8 @@
 
 A simple javascript all-in-one webpage for common encodings / hashings.  
 
+https://soruly.github.io/encode/
+
 ## Supported Encodings
 - HTML
 - Unicode
@@ -17,8 +19,3 @@ A simple javascript all-in-one webpage for common encodings / hashings.
 - SHA1
 - SHA256
 - SHA512
-
-## Installation
-```bash
-npm install
-```
