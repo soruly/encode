@@ -110,6 +110,25 @@
       return str;
     }
 
+    function unicodeToBase64(str) {
+      return btoa(
+        encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function toSolidBytes(match, p1) {
+          return String.fromCharCode("0x" + p1);
+        })
+      );
+    }
+
+    function base64ToUnicode(str) {
+      return decodeURIComponent(
+        atob(str)
+          .split("")
+          .map(function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          })
+          .join("")
+      );
+    }
+
     var html = document.getElementById("html");
     var encode_html = document.getElementById("encode_html");
     var decode_html = document.getElementById("decode_html");
@@ -162,11 +181,11 @@
     var encode_base64 = document.getElementById("encode_base64");
     var decode_base64 = document.getElementById("decode_base64");
     encode_base64.onclick = function () {
-      base64.value = btoa(base64.value);
+      base64.value = unicodeToBase64(base64.value);
       base64.select();
     };
     decode_base64.onclick = function () {
-      base64.value = atob(base64.value);
+      base64.value = base64ToUnicode(base64.value);
       base64.select();
     };
 
