@@ -4,10 +4,12 @@
   "description": "All-in-one webpage for common encodings and hashings",
   "main": "index.js",
   "dependencies": {
-    "jshashes": "^1.0.7",
-    "punycode": "^2.1.0"
+    "jshashes": "^1.0.8",
+    "punycode": "^2.1.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "prettier": "^2.0.5"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
