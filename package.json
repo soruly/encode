@@ -8,7 +8,7 @@
     "punycode": "^2.3.0"
   },
   "devDependencies": {
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
