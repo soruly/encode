@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "jshashes": "^1.0.8",
-    "punycode": "^2.3.0"
+    "punycode": "^2.3.1"
   },
   "devDependencies": {
     "prettier": "^3.0.3"
