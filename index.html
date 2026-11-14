@@ -57,6 +57,10 @@
       <textarea id="base64" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="encode_base64" type="button" value="Encode" />
       <input id="decode_base64" type="button" value="Decode" />
+      <p>Base64URL</p>
+      <textarea id="base64url" rows="0" cols="0" spellcheck="false"></textarea>
+      <input id="encode_base64url" type="button" value="Encode" />
+      <input id="decode_base64url" type="button" value="Decode" />
       <p>SHA1</p>
       <textarea id="sha1" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="hash_sha1" type="button" value="Hash" />
@@ -124,6 +128,18 @@
       );
     }
 
+    function unicodeToBase64Url(str) {
+      return unicodeToBase64(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+
+    function base64UrlToUnicode(str) {
+      var base64 = str.replace(/-/g, "+").replace(/_/g, "/");
+      while (base64.length % 4) {
+        base64 += "=";
+      }
+      return base64ToUnicode(base64);
+    }
+
     var html = document.getElementById("html");
     var encode_html = document.getElementById("encode_html");
     var decode_html = document.getElementById("decode_html");
@@ -182,6 +198,18 @@
     decode_base64.onclick = function () {
       base64.value = base64ToUnicode(base64.value);
       base64.select();
+    };
+
+    var base64url = document.getElementById("base64url");
+    var encode_base64url = document.getElementById("encode_base64url");
+    var decode_base64url = document.getElementById("decode_base64url");
+    encode_base64url.onclick = function () {
+      base64url.value = unicodeToBase64Url(base64url.value);
+      base64url.select();
+    };
+    decode_base64url.onclick = function () {
+      base64url.value = base64UrlToUnicode(base64url.value);
+      base64url.select();
     };
 
     async function digestMessage(algorithm, message) {

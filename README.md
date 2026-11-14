@@ -13,6 +13,7 @@ https://soruly.github.io/encode/
 - URI
 - URI Component
 - Base64
+- Base64URL
 
 ## Supported Hashings
 
