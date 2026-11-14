@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <meta charset="utf-8" />
   <title>Common Encoder / Decoder / Hashing</title>
@@ -18,13 +18,14 @@
       width: 400px;
       height: 100px;
     }
-    textarea#md5,
     textarea#sha1,
     textarea#sha256,
+    textarea#sha384,
     textarea#sha512 {
       height: 15px;
     }
     textarea#sha256,
+    textarea#sha384,
     textarea#sha512 {
       width: 1000px;
     }
@@ -35,7 +36,7 @@
   </style>
 
   <form id="encode" action="#">
-    <fieldset style="border: none;">
+    <fieldset style="border: none">
       <p>HTML</p>
       <textarea id="html" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="encode_html" type="button" value="Encode" />
@@ -56,27 +57,21 @@
       <textarea id="base64" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="encode_base64" type="button" value="Encode" />
       <input id="decode_base64" type="button" value="Decode" />
-      <p>Punycode</p>
-      <textarea id="punycode_field" rows="0" cols="0" spellcheck="false"></textarea>
-      <input id="encode_punycode" type="button" value="Encode" />
-      <input id="decode_punycode" type="button" value="Decode" />
-      <p>MD5</p>
-      <textarea id="md5" rows="0" cols="0" spellcheck="false"></textarea>
-      <input id="hash_md5" type="button" value="Hash" />
       <p>SHA1</p>
       <textarea id="sha1" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="hash_sha1" type="button" value="Hash" />
       <p>SHA-256</p>
       <textarea id="sha256" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="hash_sha256" type="button" value="Hash" />
+      <p>SHA-384</p>
+      <textarea id="sha384" rows="0" cols="0" spellcheck="false"></textarea>
+      <input id="hash_sha384" type="button" value="Hash" />
       <p>SHA-512</p>
       <textarea id="sha512" rows="0" cols="0" spellcheck="false"></textarea>
       <input id="hash_sha512" type="button" value="Hash" />
     </fieldset>
   </form>
   <p></p>
-  <script src="punycode.js"></script>
-  <script src="hashes.min.js"></script>
   <script>
     function html_encode(str) {
       var a = Array();
@@ -114,7 +109,7 @@
       return btoa(
         encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function toSolidBytes(match, p1) {
           return String.fromCharCode("0x" + p1);
-        })
+        }),
       );
     }
 
@@ -125,7 +120,7 @@
           .map(function (c) {
             return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
           })
-          .join("")
+          .join(""),
       );
     }
 
@@ -189,43 +184,39 @@
       base64.select();
     };
 
-    var punycode_field = document.getElementById("punycode_field");
-    var encode_punycode = document.getElementById("encode_punycode");
-    var decode_punycode = document.getElementById("decode_punycode");
-    encode_punycode.onclick = function () {
-      punycode_field.value = punycode.toASCII(punycode_field.value);
-      punycode_field.select();
-    };
-    decode_punycode.onclick = function () {
-      punycode_field.value = punycode.toUnicode(punycode_field.value);
-      punycode_field.select();
-    };
-
-    var md5 = document.getElementById("md5");
-    var hash_md5 = document.getElementById("hash_md5");
-    hash_md5.onclick = function () {
-      md5.value = new Hashes.MD5().hex(md5.value);
-      md5.select();
-    };
+    async function digestMessage(algorithm, message) {
+      const msgUint8 = new TextEncoder().encode(message);
+      const hashBuffer = await crypto.subtle.digest(algorithm, msgUint8);
+      return Array.from(new Uint8Array(hashBuffer))
+        .map((b) => b.toString(16).padStart(2, "0"))
+        .join("");
+    }
 
     var sha1 = document.getElementById("sha1");
     var hash_sha1 = document.getElementById("hash_sha1");
-    hash_sha1.onclick = function () {
-      sha1.value = new Hashes.SHA1().hex(sha1.value);
+    hash_sha1.onclick = async function () {
+      sha1.value = await digestMessage("SHA-1", sha1.value);
       sha1.select();
     };
 
     var sha256 = document.getElementById("sha256");
     var hash_sha256 = document.getElementById("hash_sha256");
-    hash_sha256.onclick = function () {
-      sha256.value = new Hashes.SHA256().hex(sha256.value);
+    hash_sha256.onclick = async function () {
+      sha256.value = await digestMessage("SHA-256", sha256.value);
       sha256.select();
+    };
+
+    var sha384 = document.getElementById("sha384");
+    var hash_sha384 = document.getElementById("hash_sha384");
+    hash_sha384.onclick = async function () {
+      sha384.value = await digestMessage("SHA-384", sha384.value);
+      sha384.select();
     };
 
     var sha512 = document.getElementById("sha512");
     var hash_sha512 = document.getElementById("hash_sha512");
-    hash_sha512.onclick = function () {
-      sha512.value = new Hashes.SHA512().hex(sha512.value);
+    hash_sha512.onclick = async function () {
+      sha512.value = await digestMessage("SHA-512", sha512.value);
       sha512.select();
     };
   </script>
